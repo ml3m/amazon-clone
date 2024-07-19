@@ -1,4 +1,12 @@
-import { cart } from "../data/cart.js";
+import { 
+
+    cart, 
+    addToCart,
+    addedToCartMessageTimeout,
+    CartQuantityUpdate
+
+        } from "../data/cart.js";
+
 import { products } from "../data/products.js";
 
 let productsHTML = "";
@@ -61,16 +69,12 @@ products.forEach((product) => {
 
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
+
+
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
     button.addEventListener("click",() => {
         const productId = button.dataset.productId;
-        let matchingItems;
-        
-        cart.forEach((item)=>{
-            if (productId === item.productId) {
-               matchingItems = item;
-            }
-        })
+
         const quantitySelector = document.querySelector(
           `.js-quantity-selector-${productId}`
         );
@@ -79,44 +83,10 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
             `.js-added-to-cart-${productId}`
         );
 
-        messageAddedToCart.classList.add("js-added-to-cart-appear");
+        addedToCartMessageTimeout(messageAddedToCart);
+        addToCart(productId, quantitySelector);
 
-        let addedMessageTimeoutID;
-
-        if(addedMessageTimeoutID){
-            clearTimeout(addedMessageTimeoutID);
-        }
-        
-        const myTimeout_id = setTimeout(() =>{
-            messageAddedToCart.classList.remove("js-added-to-cart-appear");
-        }, 1200);
-
-        addedMessageTimeoutID = myTimeout_id;
-        
-
-
-        
-        // it is a string
-        //console.log(typeof(quantitySelector.value));
-        
-        let selectedValue = parseInt(quantitySelector.value);
-
-        if (matchingItems) {
-           matchingItems.quantity += selectedValue; 
-        } else {
-            cart.push({
-                productId: productId,
-                quantity: selectedValue 
-            })
-        }
-        
-        let CartQuantity = 0;
-
-        cart.forEach((item) => {
-            CartQuantity += item.quantity;
-        })
-
-        document.querySelector(".js-cart-quantity").innerHTML = CartQuantity;
+        document.querySelector(".js-cart-quantity").innerHTML = CartQuantityUpdate();
 
         console.log(cart);
     })

@@ -142,10 +142,12 @@
      be invisible. Use JavaScript to change the
      opacity and make it visible. */
   opacity: 0;
+  transition-duration: 0.2s;
 }
 
 .js-added-to-cart-appear {
     opacity: 1;
+    transition-duration: 1s;
 }
 
 .added-to-cart img {
