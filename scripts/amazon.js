@@ -67,8 +67,16 @@ products.forEach((product) => {
 
 });
 
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
+/***** allways update the page when initialized *****/
 
+/* HTML automation for all products */
+document.querySelector(".js-products-grid").innerHTML = productsHTML;
+/* update Cart Quantiy by default */
+if (CartQuantityUpdate() > 99) {
+    document.querySelector(".js-cart-quantity").innerHTML = "99+";
+}else{
+    document.querySelector(".js-cart-quantity").innerHTML = CartQuantityUpdate();
+}
 
 
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
@@ -91,4 +99,5 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
         console.log(cart);
     })
 });
+
 
