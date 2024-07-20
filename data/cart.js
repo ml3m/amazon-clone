@@ -59,3 +59,11 @@ export function CartQuantityUpdate(){
 
     return CartQuantity;
 }
+
+export function removeFromCart(productId) {
+    cart.forEach((item, index) => {
+        if (item.productId === productId) {
+            cart.splice(index, 1);
+        }
+    });
+}
