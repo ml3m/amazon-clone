@@ -8,7 +8,14 @@ export function getProduct(productId){
     })
 
     return matchingProduct;
+}
 
+export function totalNoProductsInCart(cart){
+    let totalProducts = 0;
+    cart.forEach((product) =>{
+        totalProducts += product.quantity;
+    })
+    return totalProducts;
 }
 
 export const products = [

@@ -15,6 +15,7 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { getProduct} from "../../data/products.js";
 import {deliveryOptions, getDeliveryOption} from "../../data/deliveryOptions.js";
 import {renderPaymentSummary} from "../checkout/paymentSummary.js"
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 
 
@@ -134,29 +135,23 @@ function renderOrderSummary(){
         return html;
     }
 
-    function updateCheckoutHeaderMiddleSection(){
-        document.querySelector(".js-return-to-home-link").innerHTML = CartQuantityUpdate();
-    }
-
-    updateCheckoutHeaderMiddleSection();
 
     document.querySelector(".js-order-summary").innerHTML = cartItemsHTML;
 
     // delete link in cart
-
     function deleteitem(link){
         const productId = link.dataset.productId;
         removeFromCart(productId)
 
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
-        updateCheckoutHeaderMiddleSection();
     }
 
     document.querySelectorAll(".js-delete-link").forEach((link) =>{
         link.addEventListener("click", () => {
             deleteitem(link);
             renderPaymentSummary()
+            renderCheckoutHeader();
         })
     });
 
@@ -204,8 +199,8 @@ function renderOrderSummary(){
                 quantityLabel.innerHTML = newQuantity;
 
                 updateQuantity(productId, newQuantity);
-                updateCheckoutHeaderMiddleSection();
                 renderPaymentSummary();
+                renderCheckoutHeader();
             });
         });
 
