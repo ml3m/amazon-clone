@@ -1,6 +1,3 @@
-//save data
-//generate html
-//interactive
 import {cart} from "../../data/cart.js"
 import {totalNoProductsInCart} from "../../data/products.js"
 
