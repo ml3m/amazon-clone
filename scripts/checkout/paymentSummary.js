@@ -4,7 +4,7 @@ import {getDeliveryOption} from "../../data/deliveryOptions.js"
 
 import formatCurrency from "../utils/money.js";
 
-function renderPaymentSummary(){
+export function renderPaymentSummary(){
     let productPriceCents = 0;
     let shippingPriceCents = 0;
     cart.forEach(cartItem => {
